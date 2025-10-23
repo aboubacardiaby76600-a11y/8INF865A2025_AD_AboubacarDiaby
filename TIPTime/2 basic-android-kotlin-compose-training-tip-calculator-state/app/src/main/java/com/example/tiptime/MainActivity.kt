@@ -3,12 +3,17 @@ package com.example.tiptime
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.annotation.DrawableRes
+import androidx.annotation.StringRes
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.text.KeyboardOptions
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
@@ -45,8 +50,11 @@ fun TipTimeLayout() {
     val tip = calculateTip(amount, tipPercent, roundUp)
 
     Column(
-        modifier = Modifier.padding(32.dp),
-        verticalArrangement = Arrangement.spacedBy(8.dp)
+        modifier = Modifier
+            .padding(40.dp)
+            .verticalScroll(rememberScrollState()),
+        horizontalAlignment = Alignment.CenterHorizontally,
+        verticalArrangement = Arrangement.Center
     ) {
         Text(
             text = stringResource(R.string.calculate_tip),
@@ -55,6 +63,7 @@ fun TipTimeLayout() {
         Spacer(modifier = Modifier.height(16.dp))
         EditNumberField(
             label = R.string.bill_amount,
+            leadingIcon = R.drawable.money,
             value = amountInput,
             onValueChanged = { amountInput = it },
             keyboardOptions = KeyboardOptions.Default.copy(
@@ -64,6 +73,7 @@ fun TipTimeLayout() {
         )
         EditNumberField(
             label = R.string.how_was_the_service,
+            leadingIcon = R.drawable.percent,
             value = tipInput,
             onValueChanged = { tipInput = it },
             keyboardOptions = KeyboardOptions.Default.copy(
@@ -86,7 +96,8 @@ fun TipTimeLayout() {
 
 @Composable
 fun EditNumberField(
-    label: Int,
+    @StringRes label: Int,
+    @DrawableRes leadingIcon: Int,
     value: String,
     onValueChanged: (String) -> Unit,
     keyboardOptions: KeyboardOptions,
@@ -96,6 +107,7 @@ fun EditNumberField(
         value = value,
         onValueChange = onValueChanged,
         label = { Text(stringResource(label)) },
+        leadingIcon = { Icon(painter = painterResource(id = leadingIcon), contentDescription = null) },
         singleLine = true,
         keyboardOptions = keyboardOptions,
         modifier = modifier.fillMaxWidth()
