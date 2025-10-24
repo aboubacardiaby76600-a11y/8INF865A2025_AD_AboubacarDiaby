@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">Woof</string>
+    <string name="years_old">%1$d years old</string>
 
-    <!-- Noms des chiens -->
     <string name="dog_name_koda">Koda</string>
     <string name="dog_name_lola">Lola</string>
     <string name="dog_name_frankie">Frankie</string>
@@ -11,10 +11,4 @@
     <string name="dog_name_moana">Moana</string>
     <string name="dog_name_tzeitel">Tzeitel</string>
     <string name="dog_name_leroy">Leroy</string>
-
-    <!-- Format de texte pour l'âge -->
-    <string name="years_old">%1$d years old</string>
-
-    <!-- Autres chaînes générales -->
-    <string name="content_description_dog_image">Dog image</string>
 </resources>

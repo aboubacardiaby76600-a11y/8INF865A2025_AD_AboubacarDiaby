@@ -1,5 +1,6 @@
 package com.example.woof.ui.theme
 
+import androidx.compose.material3.Typography
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
@@ -16,7 +17,7 @@ val Montserrat = FontFamily(
     Font(R.font.montserrat_bold, FontWeight.Bold)
 )
 
-val Typography = androidx.compose.material3.Typography(
+val Typography = Typography(
     displayLarge = TextStyle(
         fontFamily = AbrilFatface,
         fontWeight = FontWeight.Normal,
@@ -26,11 +27,6 @@ val Typography = androidx.compose.material3.Typography(
         fontFamily = Montserrat,
         fontWeight = FontWeight.Bold,
         fontSize = 20.sp
-    ),
-    labelSmall = TextStyle(
-        fontFamily = Montserrat,
-        fontWeight = FontWeight.Bold,
-        fontSize = 14.sp
     ),
     bodyLarge = TextStyle(
         fontFamily = Montserrat,
