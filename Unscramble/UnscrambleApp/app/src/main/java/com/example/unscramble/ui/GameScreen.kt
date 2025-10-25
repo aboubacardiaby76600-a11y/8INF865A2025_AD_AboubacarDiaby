@@ -52,7 +52,8 @@ fun GameScreen(gameViewModel: GameViewModel = viewModel()) {
                 userGuess = gameViewModel.userGuess,
                 onUserGuessChanged = { gameViewModel.updateUserGuess(it) },
                 onKeyboardDone = { gameViewModel.checkUserGuess() },
-                isGuessWrong = gameUiState.isGuessedWordWrong
+                isGuessWrong = gameUiState.isGuessedWordWrong,
+                wordCount = gameUiState.currentWordCount
             )
 
             Spacer(modifier = Modifier.height(16.dp))
@@ -96,6 +97,7 @@ fun GameLayout(
     onUserGuessChanged: (String) -> Unit,
     onKeyboardDone: () -> Unit,
     isGuessWrong: Boolean,
+    wordCount: Int,
     modifier: Modifier = Modifier
 ) {
     val mediumPadding = dimensionResource(R.dimen.padding_medium)
@@ -106,6 +108,12 @@ fun GameLayout(
             horizontalAlignment = Alignment.CenterHorizontally,
             modifier = Modifier.padding(mediumPadding)
         ) {
+            Text(
+                text = stringResource(R.string.word_count, wordCount),
+                style = MaterialTheme.typography.titleMedium,
+                color = MaterialTheme.colorScheme.onPrimaryContainer
+            )
+
             Text(
                 text = currentScrambledWord,
                 style = MaterialTheme.typography.displayMedium
