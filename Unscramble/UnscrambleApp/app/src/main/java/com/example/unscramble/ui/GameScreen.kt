@@ -29,8 +29,7 @@ fun GameScreen(gameViewModel: GameViewModel = viewModel()) {
     if (gameUiState.isGameOver) {
         FinalScoreDialog(
             score = gameUiState.score,
-            onPlayAgain = { gameViewModel.resetGame() },
-            onExit = { (LocalContext.current as? Activity)?.finish() }
+            onPlayAgain = { gameViewModel.resetGame() }
         )
     } else {
         Column(
@@ -83,11 +82,6 @@ fun GameScreen(gameViewModel: GameViewModel = viewModel()) {
             GameStatus(score = gameUiState.score)
         }
     }
-}
-
-@Composable
-fun FinalScoreDialog(score: Int, onPlayAgain: () -> Unit, onExit: @Composable () -> Unit?) {
-    TODO("Not yet implemented")
 }
 
 @Composable
@@ -148,6 +142,31 @@ fun GameStatus(score: Int, modifier: Modifier = Modifier) {
             modifier = Modifier.padding(8.dp)
         )
     }
+}
+
+@Composable
+fun FinalScoreDialog(
+    score: Int,
+    onPlayAgain: () -> Unit,
+    modifier: Modifier = Modifier
+) {
+    val activity = LocalContext.current as Activity
+    AlertDialog(
+        onDismissRequest = {},
+        title = { Text(stringResource(R.string.congratulations)) },
+        text = { Text(stringResource(R.string.you_scored, score)) },
+        modifier = modifier,
+        dismissButton = {
+            TextButton(onClick = { activity.finish() }) {
+                Text(text = stringResource(R.string.exit))
+            }
+        },
+        confirmButton = {
+            TextButton(onClick = onPlayAgain) {
+                Text(text = stringResource(R.string.play_again))
+            }
+        }
+    )
 }
 
 @Preview(showBackground = true)
